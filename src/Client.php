@@ -30,6 +30,11 @@ class Client
     protected $events;
 
     /**
+     * @var \TelegramBot\Api\Type\Update
+     */
+    protected $update;
+
+    /**
      * Client constructor
      *
      * @param string $token Telegram Bot API token
@@ -133,6 +138,7 @@ class Client
     {
         if ($data = BotApi::jsonValidate($this->getRawBody(), true)) {
             $this->handle([Update::fromResponse($data)]);
+            $this->update = Update::fromResponse($data);
         }
     }
 
